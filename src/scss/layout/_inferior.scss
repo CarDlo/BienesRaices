@@ -17,6 +17,10 @@
         margin-bottom: 0;
     }
 }
+.informacion-meta{
+    span{
+        color: $amarillo;}
+}
 .texto-entrada{
     a{
         color: $negro;
@@ -27,6 +31,7 @@
             margin: 0;
         }
     }
+
     h4{
         margin: 0;
         line-height: 1.4;
