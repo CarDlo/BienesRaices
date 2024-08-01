@@ -30,6 +30,7 @@
     margin-top: 3rem;
     text-align: center;
     display: $display;
+    border: none;
     &:hover{
         cursor: pointer;
         background-color: darken($bgColor, 5);
