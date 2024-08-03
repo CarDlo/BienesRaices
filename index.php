@@ -1,6 +1,9 @@
 <?php
+    require 'includes/funciones.php';
+
     $inicio = true;
-    include './includes/templates/header.php';
+    
+    incluirTemplate('header', $inicio);
 ?>
     <main class="contenedor">
         <h1>Mas sobre nosotros</h1>
@@ -169,9 +172,6 @@
         </section>
     </div>
 <?php
-    include './includes/templates/footer.php';
+    incluirTemplate('footer');
 ?>
 
-    <script src="build/js/bundle.min.js"></script>
-</body>
-</html>

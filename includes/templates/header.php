@@ -25,7 +25,7 @@
                     </nav>
                 </div>
             </div>
-            <?php if($inicio) { ?>
+            <?php if($inicio==true) { ?>
                 <h1>Venta de Casas y Departamentos</h1>
             <?php } ?>
         </div>
