@@ -1,6 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
    eventListeners(); 
+   darkMode();
 })
+
+function darkMode() {
+    const botonDarkMode = document.querySelector('.dark-mode-boton');
+    botonDarkMode.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+    })
+    }   
+
 function eventListeners() {
     const mobileMenu = document.querySelector('.mobile-menu');
 
