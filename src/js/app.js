@@ -4,6 +4,23 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function darkMode() {
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if(prefersDarkScheme.matches) {
+        document.body.classList.add('dark-mode');
+    }else{
+        document.body.classList.remove('dark-mode');
+    }
+
+    prefersDarkScheme.addEventListener('change', (event) => {
+        if(event.matches) {
+            document.body.classList.add('dark-mode');
+        }else{
+            document.body.classList.remove('dark-mode');
+        }
+    })
+
+
+
     const botonDarkMode = document.querySelector('.dark-mode-boton');
     botonDarkMode.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
