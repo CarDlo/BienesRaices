@@ -57,7 +57,7 @@
         }
 
         //Validar por tamaño (1mb max)
-        $medida = 1000000;
+        $medida = 100000000;
         if($imagen['size'] > $medida) {
             $errores[] = "La imagen es muy pesada";
         }
@@ -65,17 +65,34 @@
         //Revisar que el array de errores este vacio
         if(empty($errores)) {
 
+            //subida de archivos
+            $carpetaImagenes = '../../imagenes/';
+            //crear carpeta
+            if(!is_dir('../../imagenes')) {
+            mkdir($carpetaImagenes);
+            }
 
+            //subir la imagen
+            $nombreImagen = '';
+            if($imagen['name']) {
+            $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
+            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
+            }
 
-        //insertar en la base de datos
-        $query = "INSERT INTO propiedades (titulo, precio,descripcion,habitaciones,wc,estacionamiento,creado,vendedores_id)
-        VALUES ('$titulo','$precio','$descripcion','$habitaciones','$wc','$estacionamiento','$creado','$vendedorId')";
-        $resultado = mysqli_query($db, $query);
+            echo $imagen['tmp_name'];
+            echo '  ///  ';
+            echo $carpetaImagenes . $nombreImagen;
+            exit;
 
-        if($resultado) {
-            //redireccionar al usuario
-            header('Location: /BienesRaices/admin');
-        }
+            //insertar en la base de datos
+            $query = "INSERT INTO propiedades (titulo, precio,imagen,descripcion,habitaciones,wc,estacionamiento,creado,vendedores_id)
+            VALUES ('$titulo','$precio','$nombreImagen','$descripcion','$habitaciones','$wc','$estacionamiento','$creado','$vendedorId')";
+            $resultado = mysqli_query($db, $query);
+
+            if($resultado) {
+                //redireccionar al usuario
+                header('Location: /BienesRaices/admin');
+            }
 
         }
 
