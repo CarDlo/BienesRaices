@@ -79,10 +79,6 @@
             move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
             }
 
-            echo $imagen['tmp_name'];
-            echo '  ///  ';
-            echo $carpetaImagenes . $nombreImagen;
-            exit;
 
             //insertar en la base de datos
             $query = "INSERT INTO propiedades (titulo, precio,imagen,descripcion,habitaciones,wc,estacionamiento,creado,vendedores_id)
@@ -91,7 +87,7 @@
 
             if($resultado) {
                 //redireccionar al usuario
-                header('Location: /BienesRaices/admin');
+                header('Location: /BienesRaices/admin?mensaje=1');
             }
 
         }
