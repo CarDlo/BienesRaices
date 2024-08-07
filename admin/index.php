@@ -1,5 +1,7 @@
 <?php
     
+
+
     //importar conexion
     require '../includes/config/database.php';
     $db = conectarDB();
@@ -44,7 +46,7 @@
                 <th><img src="/BienesRaices/imagenes/<?php echo $propiedad['imagen']; ?>" class="imagen-tabla"></th>
                 <th>$<?php echo $propiedad['precio']; ?></th>
                 <th>
-                    <a href="propiedades/actualizar.php?id=1" class="boton-verde-block">Actualizar</a>
+                    <a href="propiedades/actualizar.php?id=><?php echo $propiedad['id']; ?>" class="boton-verde-block">Actualizar</a>
                     <a href="propiedades/eliminar.php?id=1" class="boton-amarillo-block">Eliminar</a>
                 </th>
             </tr>
