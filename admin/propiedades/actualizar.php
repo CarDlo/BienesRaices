@@ -30,9 +30,9 @@
     $precio = $propiedad['precio'];
     $descripcion = $propiedad['descripcion'];
     $habitaciones = $propiedad['habitaciones'];
-    $wc = $wc['wc'];
+    $wc = $propiedad['wc'];
     $estacionamiento = $propiedad['estacionamiento'];
-    $vendedorId = $propiedad['vendedorId'];
+    $vendedorId = $propiedad['vendedores_id'];
     $imagenPropiedad = $propiedad['imagen'];
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -68,9 +68,7 @@
         if(!$vendedorId) {
             $errores[] = "Elige el vendedor";
         }
-        if(!$imagen['name'] || $imagen['error']) {
-            $errores[] = "La imagen es obligatoria";
-        }
+
 
         //Validar por tamaño (1mb max)
         $medida = 100000000;
@@ -97,13 +95,25 @@
 
 
             //insertar en la base de datos
-            $query = "INSERT INTO propiedades (titulo, precio,imagen,descripcion,habitaciones,wc,estacionamiento,creado,vendedores_id)
+           /* $query = "INSERT INTO propiedades (titulo, precio,imagen,descripcion,habitaciones,wc,estacionamiento,creado,vendedores_id)
             VALUES ('$titulo','$precio','$nombreImagen','$descripcion','$habitaciones','$wc','$estacionamiento','$creado','$vendedorId')";
+            $resultado = mysqli_query($db, $query);*/
+
+            $query = "UPDATE propiedades SET ";
+            $query .= "titulo = '$titulo', ";
+            $query .= "precio = '$precio', ";
+            $query .= "imagen = '$nombreImagen', ";
+            $query .= "descripcion = '$descripcion', ";
+            $query .= "habitaciones = '$habitaciones', ";
+            $query .= "wc = '$wc', ";
+            $query .= "estacionamiento = '$estacionamiento', ";
+            $query .= "vendedores_id = '$vendedorId' ";
+            $query .= "WHERE id = $id";
             $resultado = mysqli_query($db, $query);
 
             if($resultado) {
                 //redireccionar al usuario
-                header('Location: /BienesRaices/admin?mensaje=1');
+                header('Location: /BienesRaices/admin?mensaje=2');
             }
 
         }
@@ -127,7 +137,7 @@
         </div>
     <?php endforeach; ?>
 
-    <form class="formulario" method="POST" action="/BienesRaices/admin/propiedades/crear.php" enctype="multipart/form-data">
+    <form class="formulario" method="POST" enctype="multipart/form-data">
         <fieldset>
             <legend>Informacion General</legend>
             <label for="titulo">Título</label>

@@ -22,6 +22,10 @@
 
     <?php if( intval($mensaje)===1 ) { ?>
         <p class="alerta exito">Anuncio creado correctamente</p>
+    <?php }elseif( intval($mensaje)===2 ) { ?>
+        <p class="alerta exito">Anuncio actualizado correctamente</p>
+    <?php }elseif( intval($mensaje)===3 ) { ?>
+        <p class="alerta exito">Anuncio eliminado correctamente</p>
     <?php } ?>
 
     <a href="propiedades/crear.php"><input type="submit" value="Nueva Propiedad" class="boton-verde"></a>
