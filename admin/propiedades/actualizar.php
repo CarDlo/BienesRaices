@@ -79,19 +79,25 @@
         //Revisar que el array de errores este vacio
         if(empty($errores)) {
 
-            //subida de archivos
             $carpetaImagenes = '../../imagenes/';
             //crear carpeta
             if(!is_dir('../../imagenes')) {
-            mkdir($carpetaImagenes);
+                mkdir($carpetaImagenes);
             }
 
-            //subir la imagen
             $nombreImagen = '';
             if($imagen['name']) {
-            $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
-            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
+                unlink($carpetaImagenes . $propiedad['imagen']);
+                            //subir la imagen
+                $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
+                move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
+                
+            }else {
+                $nombreImagen = $propiedad['imagen'];
             }
+            //subida de archivos
+
+
 
 
             //insertar en la base de datos
