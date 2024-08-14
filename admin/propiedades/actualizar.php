@@ -119,7 +119,7 @@
 
             if($resultado) {
                 //redireccionar al usuario
-                header('Location: /BienesRaices/admin?mensaje=2');
+                header('Location: /admin?mensaje=2');
             }
 
         }
@@ -135,7 +135,7 @@
 
 <main class="contenedor seccion"> 
     <h1>Actualizar propiedad</h1>
-    <a href="/BienesRaices/admin/index.php"><input type="submit" value="Volver" class="boton-verde"></a>
+    <a href="/admin/index.php"><input type="submit" value="Volver" class="boton-verde"></a>
 
     <?php foreach($errores as $error): ?>
         <div class="alerta error">
@@ -154,7 +154,7 @@
 
             <label for="imagen">Imagen</label>
             <input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen">
-            <img src="/BienesRaices/imagenes/<?php echo $imagenPropiedad; ?>" alt="No tiene Imagen"  class="imagen-actualizar">
+            <img src="/imagenes/<?php echo $imagenPropiedad; ?>" alt="No tiene Imagen"  class="imagen-actualizar">
 
             <label for="descripcion">Descripción</label>
             <textarea id="descripcion" name="descripcion"><?php echo $descripcion; ?></textarea>

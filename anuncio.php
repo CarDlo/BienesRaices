@@ -28,7 +28,7 @@ require 'includes/funciones.php';
 ?>
     <main class="contenedor seccion contenido-centrado">
         <h1><?php echo $propiedad['titulo']; ?></h1>
-        <img loading="lazy" src="/BienesRaices/imagenes/<?php echo $propiedad['imagen']; ?>" alt="Anuncio casa">
+        <img loading="lazy" src="/imagenes/<?php echo $propiedad['imagen']; ?>" alt="Anuncio casa">
         
 
         <div class="resumen-propiedad">

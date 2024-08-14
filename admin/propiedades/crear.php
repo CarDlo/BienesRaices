@@ -103,7 +103,7 @@
 
 <main class="contenedor seccion"> 
     <h1>Crear propiedad</h1>
-    <a href="/BienesRaices/admin/index.php"><input type="submit" value="Volver" class="boton-verde"></a>
+    <a href="/admin/index.php"><input type="submit" value="Volver" class="boton-verde"></a>
 
     <?php foreach($errores as $error): ?>
         <div class="alerta error">
@@ -111,7 +111,7 @@
         </div>
     <?php endforeach; ?>
 
-    <form class="formulario" method="POST" action="/BienesRaices/admin/propiedades/crear.php" enctype="multipart/form-data">
+    <form class="formulario" method="POST" action="/admin/propiedades/crear.php" enctype="multipart/form-data">
         <fieldset>
             <legend>Informacion General</legend>
             <label for="titulo">Título</label>
