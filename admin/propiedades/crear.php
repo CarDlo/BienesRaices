@@ -87,7 +87,7 @@
 
             if($resultado) {
                 //redireccionar al usuario
-                header('Location: /BienesRaices/admin?mensaje=1');
+                header('Location: /admin?mensaje=1');
             }
 
         }

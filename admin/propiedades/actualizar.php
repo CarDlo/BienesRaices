@@ -3,7 +3,7 @@
     $id = $_GET['id'];
 
     if(!filter_var($id, FILTER_VALIDATE_INT)) {
-    header('Location: /BienesRaices/admin/');
+    header('Location: /admin/');
     exit;
     }
 

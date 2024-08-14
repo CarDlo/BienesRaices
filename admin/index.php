@@ -26,7 +26,7 @@
             $query = "DELETE FROM propiedades WHERE id = $id";
             $resultadoDelete = mysqli_query($db, $query);
             if($resultadoDelete){
-                header('Location: /BienesRaices/admin/?mensaje=3');
+                header('Location: /admin/?mensaje=3');
             }
 
         }
@@ -66,14 +66,14 @@
             <tr>
                 <th><?php echo $propiedad['id']; ?></th>
                 <th><?php echo $propiedad['titulo']; ?></th>
-                <th><img src="/BienesRaices/imagenes/<?php echo $propiedad['imagen']; ?>" class="imagen-tabla"></th>
+                <th><img src="/imagenes/<?php echo $propiedad['imagen']; ?>" class="imagen-tabla"></th>
                 <th>$<?php echo $propiedad['precio']; ?></th>
                 <th>
                     <form method="POST" class="w-100">
                         <input type="hidden" name="id" value="<?php echo $propiedad['id'];?>">
                         <input type="submit" value="Eliminar" class="boton-rojo-block">
                     </form>
-                    <a href="/BienesRaices/admin/propiedades/actualizar.php?id=<?php echo $propiedad['id']; ?>" class="boton-amarillo-block">Actualizar</a>
+                    <a href="/admin/propiedades/actualizar.php?id=<?php echo $propiedad['id']; ?>" class="boton-amarillo-block">Actualizar</a>
 
                 </th>
             </tr>
