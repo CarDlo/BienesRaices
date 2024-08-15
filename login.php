@@ -18,6 +18,31 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errores[] = "El password es obligatorio";
     }
 
+    if(empty($errores)) {
+        //revisar si el usuario existe
+
+        $query = "SELECT * FROM usuarios WHERE email = '$email'";
+        $resultado = mysqli_query($db, $query);
+        if($resultado->num_rows) {
+            //revisar si el password es correcto
+
+            $usuario = mysqli_fetch_assoc($resultado);
+            $auth = password_verify($password, $usuario['password']);
+            if($auth) {
+                session_start();
+                $_SESSION['login'] = true;
+                $_SESSION['id'] = $usuario['id'];
+                $_SESSION['nombre'] = $usuario['nombre'];
+                $_SESSION['email'] = $usuario['email'];
+                header('Location: /admin');
+            } else {
+                $errores[] = "El password es incorrecto";
+            }
+
+        } else {
+            $errores[] = "El usuario no existe";
+        }
+
 }
 
 //incluye header
@@ -33,7 +58,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     <?php endforeach; ?>
 
-    <form class="formulario" method="POST" action="" novalidate>
+    <form class="formulario" method="POST" action="" >
     <fieldset>
                 <legend>Email y password</legend>
 
