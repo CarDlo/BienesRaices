@@ -2,7 +2,7 @@
 
 //importar conexion
 
-require 'includes/config/database.php';
+require 'includes/app.php';
 $db = conectarDB();
 
 //crear un email usuario
@@ -17,4 +17,4 @@ $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 $query = "INSERT INTO usuarios (email, password) VALUES ('$email', '$passwordHash')";
 mysqli_query($db, $query);
 
-echo $query;
+

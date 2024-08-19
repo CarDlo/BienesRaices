@@ -8,8 +8,8 @@ if(!$id) {
 }
 
 //importar conexion
+require 'includes/app.php';
 
-require 'includes/config/database.php';
 $db = conectarDB();
 
 //consultar
@@ -23,7 +23,7 @@ if(!$resultado->num_rows === 0) {
 $propiedad = mysqli_fetch_assoc($resultado);
 
 
-require 'includes/funciones.php';
+
     incluirTemplate('header');
 ?>
     <main class="contenedor seccion contenido-centrado">

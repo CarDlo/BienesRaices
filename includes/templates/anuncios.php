@@ -3,7 +3,7 @@
 //Base de datos
 //importar conexion
 
-require 'includes/config/database.php';
+
 $db = conectarDB();
 
 //consultar

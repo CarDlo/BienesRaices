@@ -1,12 +1,10 @@
 <?php
-    session_start();
+    require '../includes/funciones.php';
+    $auth = estaAutenticado();
 
-    $auth = $_SESSION['login'];
-
-    if(!$auth){
+    if(!$auth) {
         header('Location: /');
     }
-
 
     //importar conexion
     require '../includes/config/database.php';
@@ -38,7 +36,7 @@
         }
     }
 
-    require '../includes/funciones.php';
+
     incluirTemplate('header');
 ?>
 
