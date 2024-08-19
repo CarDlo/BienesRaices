@@ -1,13 +1,14 @@
 <?php
-    require '../includes/funciones.php';
+    require '../includes/app.php';
     $auth = estaAutenticado();
+   // debugear($auth);
 
     if(!$auth) {
         header('Location: /');
     }
 
     //importar conexion
-    require '../includes/config/database.php';
+
     $db = conectarDB();
     //escribir el query
     $query = "SELECT * FROM propiedades";

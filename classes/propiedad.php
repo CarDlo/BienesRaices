@@ -20,12 +20,16 @@ class propiedad{
         $this->precio = $args['precio'] ?? '';
         $this->imagen = $args['imagen'] ?? '';
         $this->descripcion = $args['descripcion'] ?? '';
-        $this->habitaciones = $args['descripcion'] ?? '';
+        $this->habitaciones = $args['habitaciones'] ?? '';
         $this->wc = $args['wc'] ?? '';
         $this->estacionamiento = $args['estacionamiento'] ?? '';
         $this->vendedores_id = $args['vendedores_id'] ?? '';
-        $this->creado = $args['creado'] ?? '';
+        $this->creado = date('Y/m/d');
 
 
+    }
+    public function guardar(){
+
+        
     }
 }

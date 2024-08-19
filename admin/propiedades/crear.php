@@ -1,12 +1,16 @@
 <?php
-    require '../../includes/funciones.php';
+    require '../../includes/app.php';
+
+    use App\propiedad;
+
+
     $auth = estaAutenticado();
 
     if(!$auth) {
         header('Location: /');
     }
     //Base de datos
-    require '../../includes/config/database.php';
+
     $db = conectarDB();
 
     //consultar para tener los vendedores
@@ -25,6 +29,10 @@
     $vendedorId = '';
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $propiedad = new propiedad($_POST);
+        $propiedad->guardar();
+
         $titulo = mysqli_real_escape_string($db, $_POST['titulo']);
         $precio = mysqli_real_escape_string($db, $_POST['precio']);
         $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
@@ -145,7 +153,7 @@
         <fieldset>
             <legend>Vendedor</legend>
             <label for="vendedor">Vendedor</label>
-            <select name="vendedor" id="vendedor">
+            <select name="vendedores_id" id="vendedor">
                 <option value="">-- Seleccione --</option>
                 <?php while($vendedor = mysqli_fetch_assoc($consultaVendedores)) : ?>
                     <option <?php echo $vendedor['id'] === $vendedorId ? 'selected' : ''; ?> value="<?php echo $vendedor['id']; ?>">

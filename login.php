@@ -34,7 +34,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['id'] = $usuario['id'];
                 $_SESSION['nombre'] = $usuario['nombre'];
                 $_SESSION['email'] = $usuario['email'];
-                header('Location: /admin');
+                
+                header('Location: /admin/');
             } else {
                 $errores[] = "El password es incorrecto";
             }
@@ -59,7 +60,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     <?php endforeach; ?>
 
-    <form class="formulario" method="POST" action="" >
+    <form class="formulario" method="POST" novalidate>
     <fieldset>
                 <legend>Email y password</legend>
 
