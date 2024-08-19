@@ -1,0 +1,11 @@
+{
+    "name": "cardlo/bienesraices",
+    "description": "Descripción del proyecto",
+    "type": "project",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\" : "./classes"
+        }
+    }
+}
