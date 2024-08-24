@@ -57,7 +57,7 @@ class propiedad{
         $query .= join("', '",array_values($atributos));
         $query .= " ') ";
 
-       // debugear($query);
+        //debugear($query);
 
         $resultado = self::$db->query($query);
         return $resultado;
@@ -133,4 +133,37 @@ class propiedad{
 
     return self::$errores;
     }
+    //lista toddas las propiedades
+    public static function all(){
+        $query = "SELECT * FROM propiedades";
+
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+
+    }
+    public static function consultarSQL($query){
+        //consultar DB
+        $resultado = self::$db->query($query);
+        //debugear($resultado);
+        //iterar resultado
+        $array = [];
+        while($propiedad = $resultado->fetch_assoc()){
+            $array[] = self::crearObjeto($propiedad);
+        }
+        //liberar la memoria
+        $resultado->free();
+        //devolver el array
+        return $array;
+    }
+    public static function crearObjeto($registro){
+
+        $objeto = new self;
+        foreach($registro as $key => $value){
+            if(property_exists($objeto, $key)){
+                $objeto->$key = $value;
+            }
+        }
+        return $objeto;
+    }
+
 }
