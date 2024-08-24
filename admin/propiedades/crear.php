@@ -3,6 +3,8 @@
 
     use App\propiedad;
 
+    use Intervention\Image\ImageManager as Image;
+    use Intervention\Image\Drivers\Gd\Driver;
 
     $auth = estaAutenticado();
 
@@ -31,43 +33,41 @@
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $propiedad = new propiedad($_POST);
-        $errores = $propiedad->validar();
-       
 
+
+
+        //generar nombre unico
+        $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
+        //setear la imagen
+        if($_FILES['imagen']['tmp_name']){
+            $manager = new Image(Driver::class);
+            $image = $manager->read($_FILES['imagen']['tmp_name'])->cover(800,600);
+            $propiedad->setImagen($nombreImagen);
+        }
+
+
+
+        //validar
+        $errores = $propiedad->validar();
 
         //Revisar que el array de errores este vacio
         if(empty($errores)) {
 
-            $propiedad->guardar();
+            
 
-
-
-            $imagen = $_FILES['imagen'];
-    
-
-            //subida de archivos
-            $carpetaImagenes = '../../imagenes/';
-            //crear carpeta
-            if(!is_dir('../../imagenes')) {
-            mkdir($carpetaImagenes);
+            //crear carpeta para subir imagenes
+            if(!is_dir(CARPETA_IMAGENES)) {
+                mkdir(CARPETA_IMAGENES);
             }
 
-            //subir la imagen
-            $nombreImagen = '';
-            if($imagen['name']) {
-            $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
-            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
-            }
+            //guardar en el servidor
+            $image->save(CARPETA_IMAGENES . $nombreImagen);
 
-
-            //insertar en la base de datos
-            $query = "INSERT INTO propiedades (titulo, precio,imagen,descripcion,habitaciones,wc,estacionamiento,creado,vendedores_id)
-            VALUES ('$titulo','$precio','$nombreImagen','$descripcion','$habitaciones','$wc','$estacionamiento','$creado','$vendedorId')";
-            $resultado = mysqli_query($db, $query);
-
-            if($resultado) {
-                //redireccionar al usuario
-                header('Location: /admin?mensaje=1');
+            $resultado=$propiedad->guardar();
+           
+            if($resultado){
+           //redireccionar al usuario
+           header('Location: /admin?mensaje=1');
             }
 
         }

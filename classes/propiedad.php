@@ -31,7 +31,7 @@ class propiedad{
         $this->id = $args['id'] ?? null;
         $this->titulo = $args['titulo'] ?? '';
         $this->precio = $args['precio'] ?? '';
-        $this->imagen = $args['imagen'] ?? 'Imagen.jpg';
+        $this->imagen = $args['imagen'] ?? '';
         $this->descripcion = $args['descripcion'] ?? '';
         $this->habitaciones = $args['habitaciones'] ?? '';
         $this->wc = $args['wc'] ?? '';
@@ -45,7 +45,7 @@ class propiedad{
 
         //sanitizar datos
         $atributos = $this->sanitizarAtributos();
-        //debugear($atributos);
+       // debugear($atributos);
 
        
         //debugear($string);
@@ -57,13 +57,19 @@ class propiedad{
         $query .= join("', '",array_values($atributos));
         $query .= " ') ";
 
-        //debugear($query);
+       // debugear($query);
 
         $resultado = self::$db->query($query);
+        return $resultado;
         //debugear($resultado);
 
     }
-
+    //subida de archivos
+    public function setImagen($imagen){
+        if(!is_null($imagen)){
+            $this->imagen = $imagen;
+        }
+    }
     //identificar las columnas d ela abse de datos
     public function atributos(){
         $atributos = [];
@@ -103,7 +109,7 @@ class propiedad{
         if(!$this->titulo) {
             self::$errores[] = "Debes añadir un título";
         }
-        if(!$this->precio === null) {
+        if(!$this->precio) {
             self::$errores[] = "Elige un precio";
         }
         if(strlen($this->descripcion) < 50) {
@@ -130,5 +136,6 @@ class propiedad{
     //     if($this->imagen['size'] > $medida) {
     //         $errores[] = "La imagen es muy pesada";
     //     }
+    return self::$errores;
     }
 }
