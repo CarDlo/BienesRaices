@@ -6,7 +6,7 @@
     //implementar metodo para traer las propiedades
     $propiedades = Propiedad::all();
 
-    debugear($propiedades);
+    //debugear($propiedades);
 
     //mensaje condicional
     $mensaje = $_GET['mensaje'] ?? null;
@@ -58,20 +58,20 @@
             </tr>
         </thead>
         <tbody>
-        <?php while($propiedad = mysqli_fetch_assoc($resultado)) { ?>
+        <?php foreach($propiedades as $propiedad) { ?>
 
 
             <tr>
-                <th><?php echo $propiedad['id']; ?></th>
-                <th><?php echo $propiedad['titulo']; ?></th>
-                <th><img src="/imagenes/<?php echo $propiedad['imagen']; ?>" class="imagen-tabla"></th>
-                <th>$<?php echo $propiedad['precio']; ?></th>
+                <th><?php echo $propiedad->id; ?></th>
+                <th><?php echo $propiedad->titulo; ?></th>
+                <th><img src="/imagenes/<?php echo $propiedad->imagen; ?>" class="imagen-tabla"></th>
+                <th>$<?php echo $propiedad->precio; ?></th>
                 <th>
                     <form method="POST" class="w-100">
-                        <input type="hidden" name="id" value="<?php echo $propiedad['id'];?>">
+                        <input type="hidden" name="id" value="<?php echo $propiedad->id;?>">
                         <input type="submit" value="Eliminar" class="boton-rojo-block">
                     </form>
-                    <a href="/admin/propiedades/actualizar.php?id=<?php echo $propiedad['id']; ?>" class="boton-amarillo-block">Actualizar</a>
+                    <a href="/admin/propiedades/actualizar.php?id=<?php echo $propiedad->id; ?>" class="boton-amarillo-block">Actualizar</a>
 
                 </th>
             </tr>
