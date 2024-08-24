@@ -127,15 +127,10 @@ class propiedad{
         if(!$this->vendedores_id) {
             self::$errores[] = "Elige el vendedor";
         }
-    //     if(!$this->imagen['name'] || $this->imagen['error']) {
-    //         $errores[] = "La imagen es obligatoria";
-    //     }
+        if(!$this->imagen) {
+            self::$errores[] = "La imagen es obligatoria";
+        }
 
-    //     //Validar por tamaño (1mb max)
-    //     $medida = 100000000;
-    //     if($this->imagen['size'] > $medida) {
-    //         $errores[] = "La imagen es muy pesada";
-    //     }
     return self::$errores;
     }
 }
