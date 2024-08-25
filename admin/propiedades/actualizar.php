@@ -24,7 +24,7 @@ use App\propiedad;
     $consultaVendedores = mysqli_query($db, $consulta);
 
     //Arreglo con mensajes de error
-    $errores = [];
+    $errores = propiedad::getErrores();
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -34,38 +34,9 @@ use App\propiedad;
 
         $propiedad->sincronizar($args);
 
-        debugear($propiedad);
+        //debugear($propiedad);
 
-        $imagen = $_FILES['imagen'];
-
-        if(!$titulo) {
-            $errores[] = "Debes añadir un título";
-        }
-        if(!$precio) {
-            $errores[] = "Elige un precio";
-        }
-        if(strlen($descripcion) < 50) {
-            $errores[] = "La descripción es obligatoria";
-        }
-        if(!$habitaciones) {
-            $errores[] = "Elige el número de habitaciones";
-        }
-        if(!$wc) {
-            $errores[] = "Elige el número de baños";
-        }
-        if(!$estacionamiento) {
-            $errores[] = "Elige el número de estacionamiento";
-        }
-        if(!$vendedorId) {
-            $errores[] = "Elige el vendedor";
-        }
-
-
-        //Validar por tamaño (1mb max)
-        $medida = 100000000;
-        if($imagen['size'] > $medida) {
-            $errores[] = "La imagen es muy pesada";
-        }
+        $errores = $propiedad->validar();
 
         //Revisar que el array de errores este vacio
         if(empty($errores)) {
