@@ -28,16 +28,22 @@
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        $propiedad = new propiedad($_POST);
+        
+        $propiedad = new propiedad($_POST['propiedad']);
 
-
+        //debugear($_FILES['propiedad']);
 
         //generar nombre unico
         $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
         //setear la imagen
-        if($_FILES['imagen']['tmp_name']){
+
+       //debugear($_FILES['propiedad']['tmp_name']['imagen']);
+
+        //debugear($_FILES['propiedad']['tmp_name']['imagen']);
+
+        if($_FILES['propiedad']['tmp_name']['imagen']){
             $manager = new Image(Driver::class);
-            $image = $manager->read($_FILES['imagen']['tmp_name'])->cover(800,600);
+            $image = $manager->read($_FILES['propiedad']['tmp_name']['imagen'])->cover(800,600);
             $propiedad->setImagen($nombreImagen);
         }
 
