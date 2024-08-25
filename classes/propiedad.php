@@ -36,7 +36,7 @@ class propiedad{
         $this->habitaciones = $args['habitaciones'] ?? '';
         $this->wc = $args['wc'] ?? '';
         $this->estacionamiento = $args['estacionamiento'] ?? '';
-        $this->vendedores_id = $args['vendedores_id'] ?? '';
+        $this->vendedores_id = $args['vendedores_id'] ?? 1;
         $this->creado = date('Y/m/d');
 
 
