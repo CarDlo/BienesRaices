@@ -41,7 +41,19 @@ class propiedad{
 
 
     }
+
     public function guardar(){
+        if(isset($this->id)){
+            //actualizar
+            $this->actualizar();
+        }else{
+
+            //nueva propiedad
+            $this->crear();
+        }
+    }
+
+    public function crear(){
 
         //sanitizar datos
         $atributos = $this->sanitizarAtributos();
@@ -64,18 +76,39 @@ class propiedad{
         //debugear($resultado);
 
     }
+    public function actualizar(){
+        //sanitizar datos
+        $atributos = $this->sanitizarAtributos();
+
+        $valores = [];
+        foreach($atributos as $key => $value){
+            $valores[] = "{$key}='{$value}'";
+        }
+       
+        $query = " UPDATE propiedades SET ";
+        $query .= join(', ', $valores);
+        $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
+        $query .= " LIMIT 1 ";
+        
+        $resultado = self::$db->query($query);
+        if($resultado) {
+            //redireccionar al usuario
+            header('Location: /admin?mensaje=2');
+        }
+
+    }
     //subida de archivos
     public function setImagen($imagen){
 
         //elimina imagen previa
-        if($this->id){
+        if(isset($this->id)){
             $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
             if($existeArchivo){
                 unlink(CARPETA_IMAGENES . $this->imagen);
             }
         }
 
-        if(!is_null($imagen)){
+        if($imagen){
             $this->imagen = $imagen;
         }
     }

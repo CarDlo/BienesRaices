@@ -39,7 +39,7 @@ use App\propiedad;
         //debugear($propiedad);
         //Validacion subida de archivos
         $errores = $propiedad->validar();
-        
+
         //generar nombre unico
         $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
 
@@ -52,24 +52,17 @@ use App\propiedad;
 
         //Revisar que el array de errores este vacio
         if(empty($errores)) {
+            
+            //almacenar la imagen
+            //$image->save(CARPETA_IMAGENES . $nombreImagen);
+            debugear(CARPETA_IMAGENES);
+           //debugear($nombreImagen);
 
- 
-            $query = "UPDATE propiedades SET ";
-            $query .= "titulo = '$titulo', ";
-            $query .= "precio = '$precio', ";
-            $query .= "imagen = '$nombreImagen', ";
-            $query .= "descripcion = '$descripcion', ";
-            $query .= "habitaciones = '$habitaciones', ";
-            $query .= "wc = '$wc', ";
-            $query .= "estacionamiento = '$estacionamiento', ";
-            $query .= "vendedores_id = '$vendedorId' ";
-            $query .= "WHERE id = $id";
-            $resultado = mysqli_query($db, $query);
+            $propiedad->guardar();
 
-            if($resultado) {
-                //redireccionar al usuario
-                header('Location: /admin?mensaje=2');
-            }
+           
+
+
 
         }
 
