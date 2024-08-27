@@ -66,6 +66,15 @@ class propiedad{
     }
     //subida de archivos
     public function setImagen($imagen){
+
+        //elimina imagen previa
+        if($this->id){
+            $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
+            if($existeArchivo){
+                unlink(CARPETA_IMAGENES . $this->imagen);
+            }
+        }
+
         if(!is_null($imagen)){
             $this->imagen = $imagen;
         }

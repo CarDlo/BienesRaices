@@ -3,6 +3,8 @@
 use App\propiedad;
 
     require '../../includes/app.php';
+    use Intervention\Image\ImageManager as Image;
+    use Intervention\Image\Drivers\Gd\Driver;
 
     estaAutenticado();
 
@@ -35,38 +37,23 @@ use App\propiedad;
         $propiedad->sincronizar($args);
 
         //debugear($propiedad);
-
+        //Validacion subida de archivos
         $errores = $propiedad->validar();
+        
+        //generar nombre unico
+        $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
+
+        //subida de archivos
+        if($_FILES['propiedad']['tmp_name']['imagen']){
+            $manager = new Image(Driver::class);
+            $image = $manager->read($_FILES['propiedad']['tmp_name']['imagen'])->cover(800,600);
+            $propiedad->setImagen($nombreImagen);
+        }
 
         //Revisar que el array de errores este vacio
         if(empty($errores)) {
 
-            $carpetaImagenes = '../../imagenes/';
-            //crear carpeta
-            if(!is_dir('../../imagenes')) {
-                mkdir($carpetaImagenes);
-            }
-
-            $nombreImagen = '';
-            if($imagen['name']) {
-                unlink($carpetaImagenes . $propiedad['imagen']);
-                            //subir la imagen
-                $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg";
-                move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
-                
-            }else {
-                $nombreImagen = $propiedad['imagen'];
-            }
-            //subida de archivos
-
-
-
-
-            //insertar en la base de datos
-           /* $query = "INSERT INTO propiedades (titulo, precio,imagen,descripcion,habitaciones,wc,estacionamiento,creado,vendedores_id)
-            VALUES ('$titulo','$precio','$nombreImagen','$descripcion','$habitaciones','$wc','$estacionamiento','$creado','$vendedorId')";
-            $resultado = mysqli_query($db, $query);*/
-
+ 
             $query = "UPDATE propiedades SET ";
             $query .= "titulo = '$titulo', ";
             $query .= "precio = '$precio', ";
