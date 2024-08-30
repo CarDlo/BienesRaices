@@ -15,17 +15,14 @@
         $id = $_POST['id'];
         $id = filter_var($id, FILTER_VALIDATE_INT);
         if($id) {
-            //Eliminar archivo
-            $query = "SELECT imagen FROM propiedades WHERE id = $id";
-            $resultadoDelete = mysqli_query($db, $query);
-            $propiedad = mysqli_fetch_assoc($resultadoDelete);
-            unlink('../imagenes/' . $propiedad['imagen']);
 
-            $query = "DELETE FROM propiedades WHERE id = $id";
-            $resultadoDelete = mysqli_query($db, $query);
-            if($resultadoDelete){
-                header('Location: /admin/?mensaje=3');
-            }
+            $propiedad = Propiedad::find($id);
+            $propiedad->eliminar();
+            
+
+           
+
+            
 
         }
     }
