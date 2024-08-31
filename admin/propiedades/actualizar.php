@@ -54,10 +54,13 @@ use App\propiedad;
         if(empty($errores)) {
             
             //almacenar la imagen
-            $image->save(CARPETA_IMAGENES . $nombreImagen);
+            if($image){
+                $image->save(CARPETA_IMAGENES . $nombreImagen);
+            }
+            
             //debugear('C:\\laragon\\www\\BienesRaices\\imagenes\\' . $nombreImagen);
 
-           debugear(CARPETA_IMAGENES);
+          // debugear(CARPETA_IMAGENES);
 
             $propiedad->guardar();
 

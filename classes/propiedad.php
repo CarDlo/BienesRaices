@@ -50,6 +50,7 @@ class propiedad{
 
             //nueva propiedad
             $this->crear();
+            //debugear('entro a crear');
         }
     }
 
@@ -72,6 +73,7 @@ class propiedad{
         //debugear($query);
 
         $resultado = self::$db->query($query);
+        //debugear($resultado);
         return $resultado;
         //debugear($resultado);
 
@@ -117,7 +119,7 @@ class propiedad{
     public function setImagen($imagen){
 
         //elimina imagen previa
-        if(isset($this->id)){
+        if($this->id){
             $this->borrarImagen();
         }
 

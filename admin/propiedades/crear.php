@@ -51,6 +51,7 @@
 
         //validar
         $errores = $propiedad->validar();
+        //debugear($errores);
 
         //Revisar que el array de errores este vacio
         if(empty($errores)) {
@@ -66,11 +67,11 @@
             $image->save(CARPETA_IMAGENES . $nombreImagen);
 
             $resultado=$propiedad->guardar();
-           
-            if($resultado){
+           //debugear($resultado);
+            
            //redireccionar al usuario
            header('Location: /admin?mensaje=1');
-            }
+            
 
         }
 
